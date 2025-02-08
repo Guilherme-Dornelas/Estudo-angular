@@ -1,1 +1,25 @@
-<p>carros works!</p>
+<section class="container">
+    <div class="row">
+      <div *ngFor="let carro of carros" class="col-lg-3 col-md-4 col-sm-6 d-flex mb-4">
+        <div class="card" style="width: 18rem; position: relative;">
+          <div style="position: absolute; top: 0; padding: 0px 0.625rem;">
+            <p class="fw-bold">{{ carro.nome }}</p>
+            <p style="margin-top: -0.9375rem;">{{carro.ano}}</p>
+          </div>
+          <img [src]="carro.foto" class="img-fluid" style="height: 12.5rem; max-width: auto;" alt="...">
+          <div class="card-body">
+            <div class="w-100 text-end d-flex aling-items-center" style="border-bottom: 0.0625rem solid black; margin-bottom: 10px;">
+               <div class="w-100 text-start d-flex aling-items-center gap-2">
+                <i class="bi bi-speedometer2" style="color: #248BE6;"></i>
+                <p>{{carro.quilometros_rodados}} KM</p>
+               </div>
+              <p>R${{ carro.valor }}</p>
+            </div>
+            <div>
+              <button class="btn btn-primary" style="width: 90%;">Ver mais</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
