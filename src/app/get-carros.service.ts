@@ -9,11 +9,13 @@ import { throwError } from 'rxjs';
 })
 export class GetCarrosService {
 
-  public url = 'http://localhost/model/getDados.php';
+  private baseUrl = 'http://estudo.local/controller/';
+
   constructor(private http: HttpClient) { }
 
   getCarros(): Observable<any> {
-    return this.http.get<any>(this.url).pipe(
+    const url = `${this.baseUrl}listarCarros.php`;
+    return this.http.get<any>(url).pipe(
       catchError(error => {
         console.error('Erro na requisição:', error);
         return throwError(() => new Error('Erro ao buscar dados'));
@@ -21,4 +23,13 @@ export class GetCarrosService {
     );
   }
 
+  searchCarros(carro: string): Observable<any> {
+    const url = `${this.baseUrl}searchCarros.php`;
+    return this.http.post<any>(url, { carro }).pipe(
+      catchError(error => {
+        console.error('Erro na requisição:', error);
+        return throwError(() => new Error('Erro ao buscar dados'));
+      })
+    );
+  }
 }

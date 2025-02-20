@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { GetCarrosService } from '../../app/get-carros.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { SearchComponent } from '../search/search.component';
+import { ModalSearchComponent } from '../modal-search/modal-search.component';
 @Component({
   selector: 'app-carros',
   standalone: true,
   imports: [
     HttpClientModule, 
-    CommonModule],
+    CommonModule,
+    SearchComponent,
+    ModalSearchComponent
+  ],
   providers: [
     GetCarrosService
   ],
@@ -15,6 +20,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './carros.component.scss'
 })
 export class CarrosComponent {
+
   constructor(private getCarrosService: GetCarrosService) {}
 
   carros: any[] = [];
@@ -22,11 +28,7 @@ export class CarrosComponent {
   ngOnInit(): void {
     this.getCarrosService.getCarros().subscribe((data: any[]) => {
       this.carros = data;
-
-      console.log(this.carros);
     });
-
-
 
   }
 }
